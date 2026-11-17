@@ -1,6 +1,6 @@
-import { getApi } from "./api.js"
+import { getContents } from "./api.js"
 
-const data = getApi()
+const data = await getContents()
 
 export function favoris(data) {
 

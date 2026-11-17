@@ -31,6 +31,7 @@ export async function request(path, options ={}) {
 }
 
 export const getContents = () => request("/contents");
+console.log(getContents)
 
 export const getComments = () => request("/comments");
 

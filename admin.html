@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineTrack</title>
+    <link rel="stylesheet" href="./css/output.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/js/all.min.js"></script>
+</head>
+
+<body class="bg-slate-950">
+    <header class="bg-slate-900 h-15 flex justify-between items-center px-4">
+        <div>
+            <a href="#">
+                <div class="">
+                    <img src="./assets/images/logo-svg.svg" alt="logo CineTrack" class=" h-10 w-auto">
+                </div>
+            </a>
+        </div>
+        <div>
+            <button
+                class="text-slate-50 font-semibold bg-slate-800 border border-slate-500 rounded-lg p-2 hover:bg-slate-600"><a
+                    href="/index.html">catalogue</a></button>
+        </div>
+    </header>
+
+    <div class="m-4">
+        <h3 class="text-slate-100 text-3xl font-bold">Gestion du Catalogue</h3>
+        <p class="text-slate-400">Ajoutez, modifiez ou supprimez les films et séries</p>
+    </div>
+
+    <section
+        class="flex flex-col p-4 rounded-xl m-4 gap-4 md:flex-row">
+
+        <form action="" class=" flex flex-col gap-2 bg-slate-800 rounded-xl p-2   text-slate-600 md:w-1/2">
+            <div class="">
+                <h3 class="text-slate-50 font-bold mb-2">Ajouter un titre</h3>
+                <hr>
+            </div>
+            <div class="flex flex-col">
+                <label for="titre">Titre *</label>
+                <input type="text" name="titre" id="titre"
+                    class="bg-slate-700 border border-slate-500 rounded-sm p-1 text-slate-100 text-base focus:outline-0">
+
+            </div>
+
+            <div class="flex flex-col">
+                <label for="type">Type *</label>
+                <select name="type" id="type"
+                    class="bg-slate-700 border border-slate-500 rounded-sm p-1 text-slate-100 text-base focus:outline-0">
+                    <option value="movies">Film</option>
+                    <option value="series">Series</option>
+                </select>
+            </div>
+
+            <div class="flex flex-col">
+                <label for="">Année *</label>
+                <input type="number" name="annee" id="annee"
+                    class="bg-slate-700 border border-slate-500 rounded-sm p-1 text-slate-100 text-base focus:outline-0">
+            </div>
+
+            <div class="flex flex-col">
+                <label for="duree">Durée (minutes) *</label>
+                <input type="number" name="duree" id="duree"
+                    class="bg-slate-700 border border-slate-500 rounded-sm p-1 text-slate-100 text-base focus:outline-0">
+            </div>
+
+            <div class="flex flex-col">
+                <label for="">URL de l'affiche *</label>
+                <input type="URL" name="URL" id="URL"
+                    class="bg-slate-700 border border-slate-500 rounded-sm p-1 text-slate-100 text-base focus:outline-0">
+            </div>
+
+            <!-- her will be affiche image -->
+
+            <div class="flex flex-col">
+                <label for="Genres">enres (séparés par virgule) *</label>
+                <input type="text" name="Genres" id="Genres"
+                    class="bg-slate-700 border border-slate-500 rounded-sm p-1 text-slate-100 text-base focus:outline-0">
+            </div>
+
+            <div class="flex flex-col">
+                <label for="Realisateur">Réalisateur(s) *</label>
+                <input type="text" name="Realisateur" id="Realisateur"
+                    class="bg-slate-700 border border-slate-500 rounded-sm p-1 text-slate-100 text-base focus:outline-0">
+            </div>
+
+            <div class="flex flex-col">
+                <label for="pays-production">Pays de production *</label>
+                <input type="text" name="pays-production" id="pays-production"
+                    class="bg-slate-700 border border-slate-500 rounded-sm p-1 text-slate-100 text-base focus:outline-0">
+            </div>
+
+            <div class="flex flex-col">
+                <label for="Description">Synopsis / Description *</label>
+                <input type="text" name="Description" id="Description"
+                    class="bg-slate-700 border border-slate-500 rounded-sm p-1 text-slate-100 text-base focus:outline-0">
+            </div>
+
+            <div>
+                <button type="submit" id="ajouter-cat"
+                    class="bg-red-600 flex justify-center rounded-lg p-2 text-slate-50 font-semibold cursor-pointer hover:scale-101">Ajouter
+                    au catalogue</button>
+            </div>
+        </form>
+
+        <article class="w-full md:w-1/2 bg-slate-900 rounded-lg">
+            <div class="p-2 text-slate-50">
+                <h2 class="text-lg font-semibold mb-2 rounded-lg text-slate-50">Les filmes</h2>
+                <hr class="font-sm">
+                <div class="p-2 flex">
+                    <div id="contenair-contenet" class="flex flex-col gap-1">
+
+
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+</body>
