@@ -1,9 +1,14 @@
-export async function getApi() {
+const BASE_URL = "https://6afaee0d730c1d152f32c40c.mockapi.io/"
+
+export async function request(path, options ={}) {
     try {
-        const response = await fetch("https://raw.githubusercontent.com/ouchad97/cinetrack-api/main/cinetrack-data.json")
+        const response = await fetch(BASE_URL + path, {
+            headers: { "content-type": "application/json"},
+            ...options,
+        });
 
         if (!response.ok) {
-            throw new Error('Error data')
+            throw new Error(`Error ${response.status}`);
         }
         const data = await response.json()
         console.log(data)
@@ -24,3 +29,26 @@ export async function getApi() {
         body.appendChild(message)
     }
 }
+
+export const getContents = () => request("/contents");
+
+export const getComments = () => request("/comments");
+
+export const createContent = (data) =>
+     request("/contents", {
+        method: "POST",
+        body: JSON.stringify(data)
+    });
+
+
+export const updateContent = (id, data) => 
+    request(`/contents/:${id}`, {
+        method: "PUT", 
+        body: JSON.stringify(data)
+    });
+
+
+export const deleteContent = (id) =>
+    request(`/contents/:${id}`, {
+        method: "DELETE"
+    });
