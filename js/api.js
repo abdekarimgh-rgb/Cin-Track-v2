@@ -1,6 +1,6 @@
 const BASE_URL = "https://6afaee0d730c1d152f32c40c.mockapi.io/"
 
-export async function request(path, options ={}) {
+export async function request(path, options = {}) {
     try {
         const response = await fetch(BASE_URL + path, {
             headers: { "content-type": "application/json"},
@@ -31,7 +31,6 @@ export async function request(path, options ={}) {
 }
 
 export const getContents = () => request("/contents");
-console.log(getContents)
 
 export const getComments = () => request("/comments");
 
@@ -43,13 +42,13 @@ export const createContent = (data) =>
 
 
 export const updateContent = (id, data) => 
-    request(`/contents/:${id}`, {
+    request(`/contents/${id}`, {
         method: "PUT", 
         body: JSON.stringify(data)
     });
 
 
 export const deleteContent = (id) =>
-    request(`/contents/:${id}`, {
+    request(`/contents/${id}`, {
         method: "DELETE"
     });
