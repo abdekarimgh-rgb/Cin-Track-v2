@@ -216,5 +216,22 @@ function appliqueModification(data){
         await updateContent(idModif, nouveauObject)
         const updata = await getContents()
         affichageAdmin(updata)
+
+        const formTitle = document.getElementById("formTitle")
+        formTitle.textContent = "Ajouter un titre"
+
+        const titre = document.getElementById("titre").value = ""
+        const type = document.getElementById('type').value = ""
+        const annee = document.getElementById("annee").value = ""
+        const duree = document.getElementById("duree").value = ""
+        const image = document.getElementById('URL').value = ""
+        const gener = document.getElementById("Genres").value = ""
+        const directors = document.getElementById("Realisateur").value =""
+        const productionCountries = document.getElementById("pays-production").value = ""
+        const description = document.getElementById('Description').value = ""
+        const img = document.querySelector(".avatar-inp img").src = ""
+        const titleInp = document.querySelector("#title-inp").textContent = ""
+        const linkInp = document.getElementById("link-inp").textContent = ""
+
     })
 }
