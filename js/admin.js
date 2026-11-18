@@ -77,7 +77,7 @@ function supprimerData(data) {
 let idModif = null;
 function modification(data) {
     const modifier = document.getElementById("contenair-cntnt")
-    
+
     modifier.addEventListener("click", event => {
         const btn = event.target.closest(".edit")
         if (!btn) return;
@@ -87,10 +87,10 @@ function modification(data) {
 
         console.log(idModif)
 
-        if(idModif === null){
+        if (idModif === null) {
 
         }
-        
+
         const target = data.find(element => {
             return element.id === id
         })
@@ -159,14 +159,14 @@ function modification(data) {
         const buttonEnregester = document.getElementById("submit-cat")
         buttonEnregester.textContent = "Enregistrer les modifications"
 
-        
+
 
     })
-appliqueModification(data)
+    appliqueModification(data)
 }
 modification(dataApi)
 
-function recuperationDesDonnes(){
+function recuperationDesDonnes() {
     const titre = document.getElementById("titre").value
     const type = document.getElementById('type').value
     const annee = Number(document.getElementById("annee").value)
@@ -175,20 +175,20 @@ function recuperationDesDonnes(){
 
     const gener = document.getElementById("Genres").value.split(",").map(element => element.trim())
 
-    const directors = document.getElementById("Realisateur").value.split(",").map(element=>element.trim())
+    const directors = document.getElementById("Realisateur").value.split(",").map(element => element.trim())
 
-    const productionCountries = document.getElementById("pays-production").value.split(",").map(element=>element.trim())
+    const productionCountries = document.getElementById("pays-production").value.split(",").map(element => element.trim())
 
     const description = document.getElementById('Description').value
 
     let duration = null;
     let seasons = []
-    if(type === "series"){
-        for(let i = 1 ; i <= duree ; i++){
+    if (type === "series") {
+        for (let i = 1; i <= duree; i++) {
             seasons.push(i)
         }
     }
-    else{
+    else {
         duration = duree
     }
 
@@ -211,19 +211,19 @@ function recuperationDesDonnes(){
 console.log(recuperationDesDonnes())
 
 
-function appliqueModification(data){
+function appliqueModification(data) {
     const formMdf = document.getElementById("form-admin")
-    formMdf.addEventListener("submit", async event=>{
+    formMdf.addEventListener("submit", async event => {
         event.preventDefault()
-        if(idModif === null) return;
+        if (idModif === null) return;
 
-        const nouveauObject =  recuperationDesDonnes()
+        const nouveauObject = recuperationDesDonnes()
 
-        const target = data.find(element=>{
+        const target = data.find(element => {
             return element.id === idModif
         })
         console.log(target)
-        if(!confirm(`modification «${target.title}» ?`)) return;
+        if (!confirm(`modification «${target.title}» ?`)) return;
 
 
         await updateContent(idModif, nouveauObject)
@@ -240,7 +240,7 @@ function appliqueModification(data){
         const duree = document.getElementById("duree").value = ""
         const image = document.getElementById('URL').value = ""
         const gener = document.getElementById("Genres").value = ""
-        const directors = document.getElementById("Realisateur").value =""
+        const directors = document.getElementById("Realisateur").value = ""
         const productionCountries = document.getElementById("pays-production").value = ""
         const description = document.getElementById('Description').value = ""
         const img = document.querySelector(".avatar-inp img").src = ""
@@ -251,9 +251,22 @@ function appliqueModification(data){
 }
 
 
-function ajouter(){
+function ajouter() {
+    const type = document.getElementById('type')
+    const labelDuration = document.getElementById("labelDuration");
+
+    type.addEventListener("change", event => {
+        
+        if (type.value === "series" || type.value === "") {
+            labelDuration.textContent = "Seassion *"
+        }
+        else {
+            labelDuration.textContent = 'Durée (minutes) *'
+        }
+    })
+
     const formAjo = document.getElementById("form-admin")
-    formAjo.addEventListener("submit", async event=>{
+    formAjo.addEventListener("submit", async event => {
         event.preventDefault()
 
         const nouveauObject = recuperationDesDonnes()
@@ -261,6 +274,7 @@ function ajouter(){
         const newdata = await createContent(nouveauObject)
         console.log(newdata)
     })
-    
+
 }
+
 ajouter()
