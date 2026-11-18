@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 import { deleteContent } from "./api.js"
 import { getData } from "./ui.js"
 
@@ -73,4 +71,3 @@ function supprimerData(data) {
 
     })
 }
->>>>>>> Stashed changes
