@@ -228,6 +228,8 @@ function appliqueModification(data) {
 
         await updateContent(idModif, nouveauObject)
 
+
+
         const updata = await getContents()
         affichageAdmin(updata)
 
@@ -256,7 +258,7 @@ function ajouter() {
     const labelDuration = document.getElementById("labelDuration");
 
     type.addEventListener("change", event => {
-        
+
         if (type.value === "series" || type.value === "") {
             labelDuration.textContent = "Seassion *"
         }
@@ -269,10 +271,16 @@ function ajouter() {
     formAjo.addEventListener("submit", async event => {
         event.preventDefault()
 
-        const nouveauObject = recuperationDesDonnes()
-        console.log(nouveauObject)
-        const newdata = await createContent(nouveauObject)
-        console.log(newdata)
+        //doit verrifie le conflit entre ajoute est modifie
+
+        try {
+            const nouveauObject = recuperationDesDonnes()
+            console.log(nouveauObject)
+            const newdata = await createContent(nouveauObject)
+            console.log("Ajoute succes", newdata)
+        } catch(error){
+            console.error("Error ajoute", error)
+        }
     })
 
 }
