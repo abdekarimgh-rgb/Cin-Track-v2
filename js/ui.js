@@ -11,8 +11,8 @@ export async function getData() {
         return data
 
     } catch (e) {
-    console.error("errer chargement data...! ",e)
-    container.textContent = "Error chargement des donnes!"
-    container.style.color = "red"
-}
+        console.error("errer chargement data...! ", e)
+        container.textContent = "Error chargement des donnes!"
+        container.style.color = "red"
+    }
 }
