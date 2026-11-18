@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 import { deleteContent } from "./api.js"
 import { getData } from "./ui.js"
 
@@ -73,4 +71,14 @@ function supprimerData(data) {
 
     })
 }
->>>>>>> Stashed changes
+
+function modification(){
+    const modifier = document.getElementById("contenair-contenet")
+    modifier.addEventListener("click", event=>{
+        const btn = event.target.closest(".edit")
+        if(!btn)return;
+        const id = btn.dataset.number
+        console.log(id)
+    })
+}
+modification()
