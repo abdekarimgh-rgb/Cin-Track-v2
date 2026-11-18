@@ -1,3 +1,4 @@
+import { deleteContent } from "./api.js"
 import { getData } from "./ui.js"
 
 const dataApi = await getData()
@@ -38,3 +39,35 @@ function affichageAdmin(dataApi) {
     contenairCntnt.innerHTML = mesFav.join('')
 }
 affichageAdmin(dataApi)
+supprimerData(dataApi)
+
+
+function supprimerData(data) {
+    const contenairCntnt = document.querySelector("#contenair-cntnt")
+    contenairCntnt.addEventListener("click", async event => {
+
+        const button = event.target.closest('.supprimerAdmin')
+        
+
+        if(!button)return;
+
+        const id = button.dataset.number
+
+        console.log(id)
+        const film = data.find(element => element.id === id)
+        if (!confirm(`Supprimer «${film.title}» ?`)) return;
+        try {
+            await deleteContent(id)
+
+            const newData = data.filter(element =>{
+                return element.id !== id;
+            })
+            console.log(newData)
+            affichageAdmin(newData)
+
+        } catch(e){
+            console.error("Erreur suppression :", e)
+        }
+
+    })
+}
