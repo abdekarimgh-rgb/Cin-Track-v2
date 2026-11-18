@@ -1,4 +1,4 @@
-import { deleteContent } from "./api.js"
+import { deleteContent, getContents, updateContent } from "./api.js"
 import { getData } from "./ui.js"
 
 const dataApi = await getData()
@@ -47,9 +47,9 @@ function supprimerData(data) {
     contenairCntnt.addEventListener("click", async event => {
 
         const button = event.target.closest('.supprimerAdmin')
-        
 
-        if(!button)return;
+
+        if (!button) return;
 
         const id = button.dataset.number
 
@@ -59,26 +59,162 @@ function supprimerData(data) {
         try {
             await deleteContent(id)
 
-            const newData = data.filter(element =>{
+            const newData = data.filter(element => {
                 return element.id !== id;
             })
             console.log(newData)
             affichageAdmin(newData)
 
-        } catch(e){
+        } catch (e) {
             console.error("Erreur suppression :", e)
         }
 
     })
 }
-
-function modification(){
-    const modifier = document.getElementById("contenair-contenet")
-    modifier.addEventListener("click", event=>{
+let idModif = null;
+function modification(data) {
+    const modifier = document.getElementById("contenair-cntnt")
+    
+    modifier.addEventListener("click", event => {
         const btn = event.target.closest(".edit")
-        if(!btn)return;
+        if (!btn) return;
         const id = btn.dataset.number
-        console.log(id)
+
+        idModif = id
+
+        console.log(idModif)
+        const target = data.find(element => {
+            return element.id === id
+        })
+        if (target.type === "series") {
+            const derationSession = document.getElementById('deration-session')
+            derationSession.innerHTML = `
+                                        <label for="duree">Session *</label>
+                                        <input type="number" name="duree" id="duree" value=${target.seasons.length}
+                                            class="bg-slate-700 border border-slate-500 rounded-sm p-1 text-slate-100 text-base focus:outline-0">
+                                    `
+
+        }
+        else {
+            const derationSession = document.getElementById('deration-session')
+            derationSession.innerHTML = `
+                                        <label for="duree">duration *</label>
+                                        <input type="number" name="duree" id="duree"
+                                            class="bg-slate-700 border border-slate-500 rounded-sm p-1 text-slate-100 text-base focus:outline-0">
+                                    `
+
+        }
+        console.log(target)
+
+        const formMdf = document.getElementById("form-admin")
+
+        const titre = document.getElementById('titre')
+        titre.value = target.title
+        const type = document.getElementById('type')
+        type.value = target.type
+        const annee = document.getElementById('annee')
+        annee.value = target.releaseYear
+        const duree = document.getElementById('duree')
+        if (target.type === "series") {
+            duree.value = target.seasons.length
+        }
+        else {
+            duree.value = target.duration
+        }
+
+
+        const URL = document.getElementById('URL')
+        URL.value = target.image
+
+        //avatar
+
+        const image = document.querySelector(".avatar-inp img")
+        image.src = `${URL.value}`
+        const titreAvatar = document.querySelector("#title-inp")
+        titreAvatar.textContent = target.title
+
+        const linkAvatar = document.querySelector("#link-inp")
+        linkAvatar.textContent = target.image
+
+        const Genres = document.getElementById('Genres')
+        Genres.value = target.genres.join(", ")
+        const Realisateur = document.getElementById('Realisateur')
+        Realisateur.value = target.directors.join(', ')
+        const paysProduction = document.getElementById('pays-production')
+        paysProduction.value = target.productionCountries.join(", ")
+        const Description = document.getElementById('Description')
+        Description.value = target.description
+
+        const formTitle = document.getElementById("formTitle")
+        formTitle.textContent = "Modifier un titre"
+
+        const buttonEnregester = document.getElementById("submit-cat")
+        buttonEnregester.textContent = "Enregistrer les modifications"
+
+        appliqueModification(data)
+
+    })
+
+}
+modification(dataApi)
+
+function recuperationDesDonnes(){
+    const titre = document.getElementById("titre").value
+    const type = document.getElementById('type').value
+    const annee = Number(document.getElementById("annee").value)
+    const duree = Number(document.getElementById("duree").value)
+    const image = document.getElementById('URL').value
+
+    const gener = document.getElementById("Genres").value.split(",").map(element => element.trim())
+
+    const directors = document.getElementById("Realisateur").value.split(",").map(element=>element.trim())
+
+    const productionCountries = document.getElementById("pays-production").value.split(",").map(element=>element.trim())
+
+    const description = document.getElementById('Description').value
+
+    let seasons = []
+    if(type === "series"){
+        for(let i = 1 ; i <= duree ; i++){
+            seasons.push(i)
+        }
+    }
+
+    const nouveauObject = {
+        title: titre,
+        type: type,
+        releaseYear: annee,
+        duration: type === "movies"? duree: null,
+        seasons: seasons,
+        image: image,
+        genres: gener,
+        directors: directors,
+        productionCountries: productionCountries,
+        description: description
+    }
+
+    return nouveauObject;
+}
+
+console.log(recuperationDesDonnes())
+
+
+function appliqueModification(data){
+    const formMdf = document.getElementById("form-admin")
+    formMdf.addEventListener("submit", async event=>{
+        event.preventDefault()
+        if(idModif === null) return;
+
+        const nouveauObject =  recuperationDesDonnes()
+
+        const target = data.find(element=>{
+            return element.id === idModif
+        })
+        console.log(target)
+        if(!confirm(`modification «${target.title}» ?`)) return;
+
+        await updateContent(idModif, nouveauObject)
+        const updata = await getContents()
+        affichageAdmin(updata)
     })
 }
-modification()
