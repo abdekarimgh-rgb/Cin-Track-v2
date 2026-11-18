@@ -1,4 +1,4 @@
-import { deleteContent, getContents, updateContent } from "./api.js"
+import { createContent, deleteContent, getContents, updateContent } from "./api.js"
 import { getData } from "./ui.js"
 
 const dataApi = await getData()
@@ -59,11 +59,11 @@ function supprimerData(data) {
         try {
             await deleteContent(id)
 
-            const newData = data.filter(element => {
+            data = data.filter(element => {
                 return element.id !== id;
             })
-            console.log(newData)
-            affichageAdmin(newData)
+            console.log(data)
+            affichageAdmin(data)
 
         } catch (e) {
             console.error("Erreur suppression :", e)
@@ -71,6 +71,9 @@ function supprimerData(data) {
 
     })
 }
+
+
+
 let idModif = null;
 function modification(data) {
     const modifier = document.getElementById("contenair-cntnt")
@@ -83,6 +86,11 @@ function modification(data) {
         idModif = id
 
         console.log(idModif)
+
+        if(idModif === null){
+
+        }
+        
         const target = data.find(element => {
             return element.id === id
         })
@@ -151,10 +159,10 @@ function modification(data) {
         const buttonEnregester = document.getElementById("submit-cat")
         buttonEnregester.textContent = "Enregistrer les modifications"
 
-        appliqueModification(data)
+        
 
     })
-
+appliqueModification(data)
 }
 modification(dataApi)
 
@@ -173,18 +181,22 @@ function recuperationDesDonnes(){
 
     const description = document.getElementById('Description').value
 
+    let duration = null;
     let seasons = []
     if(type === "series"){
         for(let i = 1 ; i <= duree ; i++){
             seasons.push(i)
         }
     }
+    else{
+        duration = duree
+    }
 
     const nouveauObject = {
         title: titre,
         type: type,
         releaseYear: annee,
-        duration: type === "movies"? duree: null,
+        duration: duration,
         seasons: seasons,
         image: image,
         genres: gener,
@@ -213,7 +225,9 @@ function appliqueModification(data){
         console.log(target)
         if(!confirm(`modification «${target.title}» ?`)) return;
 
+
         await updateContent(idModif, nouveauObject)
+
         const updata = await getContents()
         affichageAdmin(updata)
 
@@ -235,3 +249,18 @@ function appliqueModification(data){
 
     })
 }
+
+
+function ajouter(){
+    const formAjo = document.getElementById("form-admin")
+    formAjo.addEventListener("submit", async event=>{
+        event.preventDefault()
+
+        const nouveauObject = recuperationDesDonnes()
+        console.log(nouveauObject)
+        const newdata = await createContent(nouveauObject)
+        console.log(newdata)
+    })
+    
+}
+ajouter()
