@@ -365,6 +365,12 @@
   .h-full {
     height: 100%;
   }
+  .max-h-0 {
+    max-height: 0px;
+  }
+  .max-h-1 {
+    max-height: var(--spacing);
+  }
   .max-h-4 {
     max-height: calc(var(--spacing) * 4);
   }
@@ -376,6 +382,9 @@
   }
   .max-h-40 {
     max-height: calc(var(--spacing) * 40);
+  }
+  .max-h-60 {
+    max-height: calc(var(--spacing) * 60);
   }
   .max-h-100 {
     max-height: calc(var(--spacing) * 100);
@@ -447,6 +456,17 @@
   .resize-none {
     resize: none;
   }
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+  .scrollbar-thumb-slate-600 {
+    --tw-scrollbar-thumb: var(--color-slate-600);
+    scrollbar-color: var(--tw-scrollbar-thumb) var(--tw-scrollbar-track);
+  }
+  .scrollbar-track-transparent {
+    --tw-scrollbar-track: transparent;
+    scrollbar-color: var(--tw-scrollbar-thumb) var(--tw-scrollbar-track);
+  }
   .grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -482,6 +502,9 @@
   }
   .gap-1 {
     gap: var(--spacing);
+  }
+  .gap-1\.5 {
+    gap: calc(var(--spacing) * 1.5);
   }
   .gap-2 {
     gap: calc(var(--spacing) * 2);
@@ -650,6 +673,12 @@
   .py-3 {
     padding-block: calc(var(--spacing) * 3);
   }
+  .pr-3 {
+    padding-right: calc(var(--spacing) * 3);
+  }
+  .pl-3 {
+    padding-left: calc(var(--spacing) * 3);
+  }
   .text-center {
     text-align: center;
   }
@@ -728,6 +757,9 @@
   }
   .text-slate-200 {
     color: var(--color-slate-200);
+  }
+  .text-slate-300 {
+    color: var(--color-slate-300);
   }
   .text-slate-400 {
     color: var(--color-slate-400);
@@ -877,6 +909,16 @@
   inherits: false;
   initial-value: 1;
 }
+@property --tw-scrollbar-thumb {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #0000;
+}
+@property --tw-scrollbar-track {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #0000;
+}
 @property --tw-border-style {
   syntax: "*";
   inherits: false;
@@ -1015,6 +1057,8 @@
       --tw-scale-x: 1;
       --tw-scale-y: 1;
       --tw-scale-z: 1;
+      --tw-scrollbar-thumb: #0000;
+      --tw-scrollbar-track: #0000;
       --tw-border-style: solid;
       --tw-font-weight: initial;
       --tw-shadow: 0 0 #0000;

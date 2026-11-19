@@ -1,4 +1,5 @@
 import { createComment } from "./api.js"
+import { getCommentaire }from "./ui.js"
 
 
 
@@ -25,7 +26,7 @@ export function modal(dataApi) {
             }
 
             divModal.innerHTML = `
-            <div class="relative items-center border shadow-xl rounded-2xl p-4 bg-slate-900 flex flex-col gap-4 max-h-[90vh] overflow-y-auto  ">
+            <div class="relative items-center border shadow-xl rounded-2xl p-4 bg-slate-900 flex flex-col gap-4 max-h-[90vh] overflow-y-auto scrollbar-thin scrollbar-thumb-slate-600 ">
             <div class="flex flex-col gap-4 sm:flex-row md:flex-row">
                 <button id="closeModal" class="absolute top-2 right-2 z-10 p-3 rounded-full bg-slate-700 hover:bg-red-500">✕</button>
                 <img src="${filmeInfo.image}" alt="" class="flex align-top object-cover rounded-2xl max-w-60">
@@ -60,7 +61,7 @@ export function modal(dataApi) {
                 </div>
             </div>    
                     <hr>
-                    <section class="flex flex-col w-full md:flex-row-reverse">
+                    <section class="flex flex-col w-full md:flex-row-reverse gap-1">
                     <form id="formComments" for="" class="text-slate-500 border bg-slate-950 rounded-xl p-2 w-full">
                         <p id="validateur" class="text-red-700-200"></p>
                         <div class="flex flex-col">
@@ -75,7 +76,7 @@ export function modal(dataApi) {
                     </form>
                     <div class="text-slate-500 border bg-slate-950 rounded-xl p-2 w-full">
                         <h3 class="font-semibold text-slate-200" >Avis des utilisateurs*</h3>
-                        <div class="spaceCommnet" class="p-2">
+                        <div class="spaceCommnet p-1 flex flex-col gap-2 max-h-60 overflow-y-auto scrollbar-thin scrollbar-thumb-slate-600" >
                             <p class="text-center items-center "><i>Aucun Comments</i></p>
                         </div>
                     </div>
@@ -93,7 +94,7 @@ export function modal(dataApi) {
             })
 
             comments(filme)
-
+            affichageComment(filme.id)
             const closeModal = document.getElementById('closeModal')
             closeModal.addEventListener('click', (e) => {
                 const divModal = document.getElementById('divModal')
@@ -139,4 +140,31 @@ export function modal(dataApi) {
         document.getElementById("nomComment").value = ""
         document.getElementById("commentaire").value = ""
     })
+}
+
+async function affichageComment(id){
+    const dataComments = await getCommentaire()
+    console.log(dataComments)
+
+    const target = dataComments.filter(element=>element.contentId === id)
+
+    console.log(target)
+    const spaceCommnet = document.querySelector(".spaceCommnet")
+    spaceCommnet.innerHTML =""
+
+    const HTMLComnt = target.map(element =>{
+        return`
+                                <div class="border border-slate-500 rounded-lg p-1 bg-slate-900 flex flex-col gap-1">
+                                    <div class="flex gap-1 items-center">
+                                        <i class="fa-regular fa-circle-user"></i>
+                                        <p id="authorName" class="font-semibold text-sm text-slate-200">${element.author.toUpperCase()}</p>
+                                    </div>
+                                    <div>
+                                        <p id="textAuthor" class="text-slate-400 pl-3 text-xs">${element.text}</p>
+                                    </div>
+                                    <p class="text-[10px] text-slate-600">${element.createdAt}</p>
+                                </div>
+        `
+    }) 
+    spaceCommnet.innerHTML = HTMLComnt.join("")
 }
