@@ -272,14 +272,15 @@ function ajouter() {
         event.preventDefault()
 
         //doit verrifie le conflit entre ajoute est modifie
-
-        try {
-            const nouveauObject = recuperationDesDonnes()
-            console.log(nouveauObject)
-            const newdata = await createContent(nouveauObject)
-            console.log("Ajoute succes", newdata)
-        } catch(error){
-            console.error("Error ajoute", error)
+        if (!idModif) {
+            try {
+                const nouveauObject = recuperationDesDonnes()
+                console.log(nouveauObject)
+                const newdata = await createContent(nouveauObject)
+                console.log("Ajoute succes", newdata)
+            } catch (error) {
+                console.error("Error ajoute", error)
+            }
         }
     })
 
