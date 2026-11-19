@@ -1,3 +1,4 @@
+import { createComment } from "./api.js"
 
 
 
@@ -104,8 +105,7 @@ export function modal(dataApi) {
 }
 
 
-
-function comments(filme) {
+ function comments(filme) {
 
     const formComments = document.getElementById('formComments')
     formComments.addEventListener("submit", event => {
@@ -135,6 +135,8 @@ function comments(filme) {
         }
         console.log(object)
         
-        return object
+        createComment(object)
+        document.getElementById("nomComment").value = ""
+        document.getElementById("commentaire").value = ""
     })
 }
