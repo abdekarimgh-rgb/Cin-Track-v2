@@ -214,8 +214,14 @@
   .relative {
     position: relative;
   }
+  .static {
+    position: static;
+  }
   .inset-0 {
     inset: 0px;
+  }
+  .top-1 {
+    top: var(--spacing);
   }
   .top-2 {
     top: calc(var(--spacing) * 2);
@@ -323,11 +329,38 @@
   .h-40 {
     height: calc(var(--spacing) * 40);
   }
+  .max-h-4 {
+    max-height: calc(var(--spacing) * 4);
+  }
+  .max-h-12 {
+    max-height: calc(var(--spacing) * 12);
+  }
   .max-h-30 {
     max-height: calc(var(--spacing) * 30);
   }
+  .max-h-100 {
+    max-height: calc(var(--spacing) * 100);
+  }
+  .max-h-110 {
+    max-height: calc(var(--spacing) * 110);
+  }
+  .max-h-\[1vh\] {
+    max-height: 1vh;
+  }
+  .max-h-\[12\] {
+    max-height: 12;
+  }
   .max-h-\[90vh\] {
     max-height: 90vh;
+  }
+  .max-h-\[110\] {
+    max-height: 110;
+  }
+  .max-h-\[110vh\] {
+    max-height: 110vh;
+  }
+  .max-h-\[130vh\] {
+    max-height: 130vh;
   }
   .w-2 {
     width: calc(var(--spacing) * 2);
@@ -362,11 +395,17 @@
   .resize {
     resize: both;
   }
+  .resize-none {
+    resize: none;
+  }
   .grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
   .flex-col {
     flex-direction: column;
+  }
+  .flex-row {
+    flex-direction: row;
   }
   .items-center {
     align-items: center;
@@ -406,8 +445,14 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+  .overflow-auto {
+    overflow: auto;
+  }
   .overflow-y-auto {
     overflow-y: auto;
+  }
+  .rounded {
+    border-radius: 0.25rem;
   }
   .rounded-2xl {
     border-radius: var(--radius-2xl);
@@ -464,6 +509,9 @@
   }
   .bg-slate-300 {
     background-color: var(--color-slate-300);
+  }
+  .bg-slate-400 {
+    background-color: var(--color-slate-400);
   }
   .bg-slate-500 {
     background-color: var(--color-slate-500);
@@ -530,6 +578,9 @@
   }
   .text-center {
     text-align: center;
+  }
+  .align-top {
+    vertical-align: top;
   }
   .font-serif {
     font-family: var(--font-serif);
@@ -606,6 +657,9 @@
   }
   .text-slate-800 {
     color: var(--color-slate-800);
+  }
+  .text-slate-900 {
+    color: var(--color-slate-900);
   }
   .text-slate-950 {
     color: var(--color-slate-950);
@@ -703,6 +757,9 @@
     }
     .md\:flex-row {
       flex-direction: row;
+    }
+    .md\:flex-row-reverse {
+      flex-direction: row-reverse;
     }
     .md\:justify-between {
       justify-content: space-between;

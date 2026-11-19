@@ -1,5 +1,6 @@
 
 
+
 export function modal(dataApi) {
     const filmes = document.querySelectorAll('.filmes')
     filmes.forEach(filme => {
@@ -12,20 +13,21 @@ export function modal(dataApi) {
             const divModal = document.createElement('div')
             divModal.id = 'divModal'
 
-            divModal.className = "fixed inset-0 z-50 flex justify-center items-center "
+            divModal.className = "fixed inset-0 z-50 flex justify-center flex flex-col items-center "
 
             let timeOrSeasons = ""
             if (filmeInfo.type === "movie") {
                 timeOrSeasons = `${filmeInfo.duration} min`
             }
             else {
-                timeOrSeasons = `${filmeInfo.seasons.length} Seasons` 
+                timeOrSeasons = `${filmeInfo.seasons.length} Seasons`
             }
 
             divModal.innerHTML = `
-                            <div class="relative items-center border shadow-xl rounded-2xl p-4 bg-slate-900 flex flex-col gap-4 max-h-[90vh] overflow-y-auto sm:flex-row md:flex-row ">
+            <div class="relative items-center border shadow-xl rounded-2xl p-4 bg-slate-900 flex flex-col gap-4 max-h-[90vh] overflow-y-auto  ">
+            <div class="flex flex-col gap-4 sm:flex-row md:flex-row">
                 <button id="closeModal" class="absolute top-2 right-2 z-10 p-3 rounded-full bg-slate-700 hover:bg-red-500">✕</button>
-                <img src="${filmeInfo.image}" alt="" class=" object-cover rounded-2xl max-w-60">
+                <img src="${filmeInfo.image}" alt="" class="flex align-top object-cover rounded-2xl max-w-60">
                 <div class="flex flex-col gap-4">
                     <div class="flex gap-2 font-semibold text-slate-50">
                         <span class="bg-amber-600 rounded-sm px-2">${filmeInfo.type}</span>
@@ -54,23 +56,42 @@ export function modal(dataApi) {
                         <p class="text-xs font text-slate-500 font-semibold">Synopsis</p>
                         <p class="text-slate-100">${filmeInfo.description}</p>
                     </div>
-                    <hr>
-                    <button class="bg-red-600 flex justify-center rounded-lg p-2 text-slate-50 font-semibold cursor-pointer hover:scale-101"><svg xmlns="http://www.w3.org/2000/svg"
-                 fill="none" viewBox="0 0 24 24" 
-                 stroke="currentColor" 
-                 class="size-6 ">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" /></svg>Ajoute aux favoris</button>
                 </div>
+            </div>    
+                    <hr>
+                    <section class="flex flex-col w-full md:flex-row-reverse">
+                    <form id="formComments" for="" class="text-slate-500 border bg-slate-950 rounded-xl p-2 w-full">
+                        <p id="validateur" class="text-red-700-200"></p>
+                        <div class="flex flex-col">
+                            <label for="nomComment">Nom *</label>
+                            <input type="text" name="nomComment" id="nomComment" class="bg-slate-500 rounded-lg p-1 text-slate-100 px-2">
+                        </div>
+                        <div class="flex flex-col mb-1">
+                            <label for="commentaire" >Commentaire *</label>
+                            <textarea name="commentaire" id="commentaire" class="bg-slate-500 rounded-lg max-6 resize-none text-slate-100 px-2"></textarea>
+                        </div>
+                        <button class="bg-red-600 flex justify-center rounded-lg p-2 text-slate-50 font-semibold cursor-pointer hover:scale-101">Ajoute aux favoris</button>
+                    </form>
+                    <div class="text-slate-500 border bg-slate-950 rounded-xl p-2 w-full">
+                        <h3 class="font-semibold text-slate-200" >Avis des utilisateurs*</h3>
+                        <div class="spaceCommnet" class="p-2">
+                            <p class="text-center items-center "><i>Aucun Comments</i></p>
+                        </div>
+                    </div>
+                    </section>
+                 
             </div>
             `
 
             body.appendChild(divModal)
             const genres = document.getElementById('genres')
             const infoGenres = filmeInfo.genres
-            
+
             infoGenres.forEach(element => {
                 genres.innerHTML += `<span class="bg-slate-700 border border-slate-600 rounded-lg px-2">${element}</span>`
             })
+
+            comments(filme)
 
             const closeModal = document.getElementById('closeModal')
             closeModal.addEventListener('click', (e) => {
@@ -80,4 +101,40 @@ export function modal(dataApi) {
         })
     })
 
+}
+
+
+
+function comments(filme) {
+
+    const formComments = document.getElementById('formComments')
+    formComments.addEventListener("submit", event => {
+        event.preventDefault()
+
+
+        const contentId = filme.id
+        const author = document.getElementById("nomComment").value.trim()
+        const text = document.getElementById("commentaire").value.trim()
+        const createdAt = new Date()
+
+
+        const validateur = document.getElementById("validateur")
+        if (!author || !text) {
+            validateur.textContent = "Touts les chemps est obligatoire!"
+            validateur.style.color = "red"
+            return;
+        }
+        validateur.textContent = ""
+
+        const object = {
+            contentId: contentId,
+            author: author,
+            text: text,
+            rating: null,
+            createdAt: createdAt
+        }
+        console.log(object)
+        
+        return object
+    })
 }
