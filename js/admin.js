@@ -161,14 +161,13 @@ function modification(data) {
         const formTitle = document.getElementById("formTitle")
         formTitle.textContent = "Modifier un titre"
 
-        const buttonEnregester = document.getElementById("submit-cat")
-        buttonEnregester.textContent = "Enregistrer les modifications"
-
-
-
+        // const buttonEnregester = document.getElementById("submit-cat")
+        // buttonEnregester.textContent = "Enregistrer les modifications"
     })
     appliqueModification(data)
 }
+
+
 modification(dataApi)
 
 

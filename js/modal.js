@@ -15,7 +15,7 @@ export function modal(dataApi) {
             const divModal = document.createElement('div')
             divModal.id = 'divModal'
 
-            divModal.className = "fixed inset-0 z-50 flex justify-center flex flex-col items-center "
+            divModal.className = "fixed inset-0 z-50 flex justify-center flex flex-col items-center"
 
             let timeOrSeasons = ""
             if (filmeInfo.type === "movie") {
@@ -38,7 +38,7 @@ export function modal(dataApi) {
                     <h3 class="text-2xl font-bold text-slate-50">${filmeInfo.title}</h3>
                     <div class="flex gap-3">
                         <div class=" bg-slate-700 border border-slate-600 rounded-lg px-2">
-                            <span>${timeOrSeasons} min</span>
+                            <span>${timeOrSeasons}</span>
                         </div>
                         <div class="bg-slate-700 border border-slate-600 rounded-lg px-2">
                             <span>${filmeInfo.productionCountries.join(' - ')}</span>
@@ -72,7 +72,7 @@ export function modal(dataApi) {
                             <label for="commentaire" >Commentaire *</label>
                             <textarea name="commentaire" id="commentaire" class="bg-slate-500 rounded-lg max-6 resize-none text-slate-100 px-2"></textarea>
                         </div>
-                        <button class="bg-red-600 flex justify-center rounded-lg p-2 text-slate-50 font-semibold cursor-pointer hover:scale-101">Ajoute aux favoris</button>
+                        <button class="bg-red-600 flex justify-center rounded-lg p-2 text-slate-50 font-semibold cursor-pointer hover:scale-101">Ajoute Commentaire</button>
                     </form>
                     <div class="text-slate-500 border bg-slate-950 rounded-xl p-2 w-full">
                         <h3 class="font-semibold text-slate-200" >Avis *</h3>
