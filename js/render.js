@@ -1,8 +1,8 @@
-import { getApi } from "./api.js";
+import { getContents } from "./api.js";
 import { modal } from "./modal.js";
 import { searchFilter } from "./filters.js";
 import { favoris } from "./favorites.js";
-const dataApi = await getApi()
+const dataApi = await getContents()
 console.log(dataApi)
 export function affichageCards(data) {
     const containerCards = document.getElementById('container-cards')
@@ -75,6 +75,7 @@ export function pagenation(datafilter, pageActuelle) {
             event.preventDefault()
             const page = parseInt(event.target.dataset.page)
             pagenation(datafilter, page)
+            modal(datafilter)
         })
     }
     renderNumberPage()
