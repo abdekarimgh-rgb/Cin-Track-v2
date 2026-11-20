@@ -73,7 +73,7 @@ Chaque utilisateur doit configurer son propre endpoint MockAPI dans le fichier `
 
 ## Installation et lancement
 
-1. Cloner le dépôt :
+1. Cloner le dépôt : https://github.com/abdekarimgh-rgb/Cin-Track-v2.git
 
 ```bash
 git clone URL_DU_DEPOT
