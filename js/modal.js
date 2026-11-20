@@ -75,7 +75,7 @@ export function modal(dataApi) {
                         <button class="bg-red-600 flex justify-center rounded-lg p-2 text-slate-50 font-semibold cursor-pointer hover:scale-101">Ajoute aux favoris</button>
                     </form>
                     <div class="text-slate-500 border bg-slate-950 rounded-xl p-2 w-full">
-                        <h3 class="font-semibold text-slate-200" >Avis des utilisateurs*</h3>
+                        <h3 class="font-semibold text-slate-200" >Avis *</h3>
                         <div class="spaceCommnet p-1 flex flex-col gap-2 max-h-60 overflow-y-auto scrollbar-thin scrollbar-thumb-slate-600" >
                             <p class="text-center items-center "><i>Aucun Comments</i></p>
                         </div>
@@ -139,17 +139,22 @@ export function modal(dataApi) {
         createComment(object)
         document.getElementById("nomComment").value = ""
         document.getElementById("commentaire").value = ""
+
+
     })
 }
 
 async function affichageComment(id){
     const dataComments = await getCommentaire()
     console.log(dataComments)
-
-    const target = dataComments.filter(element=>element.contentId === id)
-
-    console.log(target)
     const spaceCommnet = document.querySelector(".spaceCommnet")
+    const target = dataComments.filter(element=>element.contentId === id)
+    if(!target){
+        spaceCommnet.innerHTML = `<p class="text-center items-center "><i>Aucun Comments</i></p>`
+        return
+    }
+    console.log(target)
+    
     spaceCommnet.innerHTML =""
 
     const HTMLComnt = target.map(element =>{
@@ -167,4 +172,5 @@ async function affichageComment(id){
         `
     }) 
     spaceCommnet.innerHTML = HTMLComnt.join("")
+
 }

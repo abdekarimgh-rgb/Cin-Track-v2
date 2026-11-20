@@ -30,7 +30,7 @@ export async function getCommentaire() {
 
     } catch (e) {
         console.error("errer chargement data...! ", e)
-        spaceCommnet.textContent = "Error chargement des donnes!"
+        spaceCommnet.textContent = " « Aucun commentaire » "
         spaceCommnet.style.color = "red"
     }
 }
