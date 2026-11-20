@@ -218,6 +218,11 @@ function appliqueModification(data) {
         if (idModif === null) return;
 
         const nouveauObject = recuperationDesDonnes()
+        
+        if(!nouveauObject.title || !nouveauObject.type || !nouveauObject.releaseYear || !nouveauObject.image || !nouveauObject.genres || !nouveauObject.directors || !nouveauObject.productionCountries || !description){
+        alert("les chemps doit tous remplir")
+        return
+    }
 
         const target = data.find(element => {
             return element.id === idModif
@@ -227,8 +232,6 @@ function appliqueModification(data) {
 
 
         await updateContent(idModif, nouveauObject)
-
-
 
         const updata = await getContents()
         affichageAdmin(updata)
