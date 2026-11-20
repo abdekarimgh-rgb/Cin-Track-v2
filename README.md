@@ -1,152 +1,105 @@
-#  CinéTrack
+#  CinéTrack V2 — Catalogue de films et séries
 
-## Présentation du projet
+##  Présentation du projet
 
-**CinéTrack** est une application web qui permet aux utilisateurs de découvrir et consulter un catalogue de films et de séries. Les données sont récupérées depuis une API MockAPI et affichées dynamiquement à travers une interface simple et responsive.
+CinéTrack est une application web permettant de consulter un catalogue de films et de séries, d'afficher leurs détails et de partager des avis avec les autres utilisateurs.
 
-L'application permet également de rechercher des titres, de filtrer les résultats, de naviguer entre les pages et de gérer une liste de favoris.
+Cette deuxième version enrichit l'application avec un espace d'administration pour gérer les contenus et un système de commentaires connecté à une API REST créée avec MockAPI.
 
-## Fonctionnalités principales
+##  Objectifs
 
-###  Catalogue
+- Consulter un catalogue de films et de séries.
+- Afficher les informations détaillées de chaque contenu.
+- Ajouter, modifier et supprimer des films et des séries.
+- Ajouter et consulter les commentaires des utilisateurs.
+- Communiquer avec une API REST pour gérer les données.
 
-- Affichage des films et des séries sous forme de cards.
-- Présentation de l'image, du titre, de l'année de sortie et du type.
-- Affichage dynamique des données récupérées depuis l'API.
+##  Technologies utilisées
 
-###  Recherche et filtrage
+- HTML5
+- Tailwind CSS
+- JavaScript ES6+
+- Fetch API
+- MockAPI.io
+- Async / Await
+- Modules JavaScript (Import / Export)
+- LocalStorage
 
-- Recherche d'un film ou d'une série par son titre.
-- Filtrage par type : Tous, Films et Séries.
-- Possibilité d'utiliser la recherche et le filtre simultanément.
+##  Fonctionnalités
 
-###  Pagination
+###  Catalogue utilisateur
 
-- Affichage de 8 éléments par page.
-- Navigation entre les différentes pages.
-- Retour automatique à la première page après une recherche ou un changement de filtre.
+- Affichage des films et des séries.
+- Consultation des détails dans une fenêtre modale.
+- Affichage des genres, réalisateurs, pays de production et synopsis.
+- Consultation des commentaires associés à chaque contenu.
+- Ajout de nouveaux commentaires.
 
-###  Modal
+###  Administration
 
-- Ouverture d'une fenêtre modale en cliquant sur une card.
-- Affichage des informations détaillées :
-  - Image et titre.
-  - Type et année de sortie.
-  - Durée du film ou nombre de saisons.
-  - Genres.
-  - Réalisateurs.
-  - Pays de production.
-  - Description.
+- Affichage de la liste des films et des séries.
+- Ajout d'un nouveau film ou d'une nouvelle série.
+- Modification des informations d'un contenu.
+- Suppression d'un contenu avec confirmation.
+- Validation des formulaires.
 
-###  Gestion des favoris
+###  Système de commentaires
 
-- Ajout et suppression des favoris avec un bouton cœur.
-- Affichage des favoris dans une sidebar fixe.
-- Suppression d'un favori avec un bouton X.
-- Sauvegarde des favoris dans le `localStorage`.
-- Conservation des favoris après actualisation de la page.
+- Ajout de commentaires.
+- Affichage des commentaires dans la fenêtre modale correspondante.
+- Association de chaque commentaire à un contenu grâce à son `contentId`.
 
-###  Gestion des erreurs
+##  API REST — MockAPI
 
-- Vérification de la réponse de l'API avec `response.ok`.
-- Gestion des erreurs avec `try/catch`.
-- Affichage d'un message en cas d'échec du chargement des données.
+L'application utilise MockAPI.io pour stocker et gérer les données.
 
-## Technologies utilisées
+Deux ressources principales sont utilisées :
 
-| Technologie     | Utilisation                             |
-| --------------- | --------------------------------------- |
-| HTML5           | Structure de l'application              |
-| Tailwind CSS    | Mise en forme et responsive design      |
-| JavaScript ES6+ | Logique et interactions                 |
-| Fetch API       | Récupération des données                |
-| Async / Await   | Gestion des opérations asynchrones      |
-| Modules ES6     | Organisation du code avec import/export |
-| LocalStorage    | Sauvegarde des favoris                  |
-| MockAPI         | Fourniture des données                  |
+- `/contents` : gestion des films et des séries.
+- `/comments` : gestion des commentaires.
 
-## Concepts JavaScript utilisés
+Les opérations HTTP utilisées :
 
-- `map()` : génération des cards à partir des données.
-- `filter()` : recherche et filtrage des films et des séries.
-- `find()` : récupération des informations d'un titre sélectionné.
-- `reduce()` : comptage des favoris par type.
-- `addEventListener()` : gestion des événements utilisateur.
-- `stopPropagation()` : empêcher le clic sur le bouton favori d'ouvrir la modal.
-- `JSON.stringify()` et `JSON.parse()` : conversion et stockage des favoris.
-- Callbacks personnalisés : réutilisation des fonctions de rendu.
+| Méthode | Utilisation                          |
+| ------- | ------------------------------------ |
+| GET     | Récupérer les données                |
+| POST    | Ajouter un contenu ou un commentaire |
+| PUT     | Modifier un contenu                  |
+| DELETE  | Supprimer un contenu                 |
 
-## Organisation du projet
+**Configuration :**
 
-```text
-CineTrack/
-│
-├── index.html
-│
-├── css/
-│   ├── input.css
-│   └── output.css
-│
-├── js/
-│   ├── main.js
-│   ├── api.js
-│   ├── render.js
-│   ├── modal.js
-│   ├── filters.js
-│   ├── pagination.js
-│   └── favorites.js
-│
-└── assets/
-    └── images/
-```
+Chaque utilisateur doit configurer son propre endpoint MockAPI dans le fichier `api.js`.
 
-### Rôle des fichiers JavaScript
+## 🚀 Installation et lancement
 
-| Fichier         | Responsabilité                          |
-| --------------- | --------------------------------------- |
-| `api.js`        | Récupération des données depuis MockAPI |
-| `render.js`     | Génération et affichage des cards       |
-| `modal.js`      | Gestion de la fenêtre modale            |
-| `filters.js`    | Recherche et filtrage                   |
-| `pagination.js` | Gestion de la pagination                |
-| `favorites.js`  | Gestion et sauvegarde des favoris       |
-
-## Installation et lancement
-
-1. Cloner le dépôt GitHub :
+1. Cloner le dépôt :
 
 ```bash
 git clone URL_DU_DEPOT
 ```
 
-2. Accéder au dossier du projet :
+2. Ouvrir le dossier du projet :
 
 ```bash
 cd CineTrack
 ```
 
-3. Vérifier que l'URL de l'API MockAPI est correctement configurée dans `js/api.js`.
+3. Configurer son endpoint personnel MockAPI dans `api.js`.
 
-4. Ouvrir le projet avec **Live Server** depuis VS Code.
+4. Lancer le projet avec l'extension **Live Server** de Visual Studio Code.
 
-## Utilisation
+##  Gestion des erreurs
 
-1. Consulter les films et les séries disponibles.
-2. Rechercher un titre à l'aide de la barre de recherche.
-3. Filtrer les résultats selon le type de contenu.
-4. Naviguer entre les pages.
-5. Cliquer sur une card pour consulter ses détails.
-6. Ajouter ou retirer des titres de la liste des favoris.
+L'application utilise `try/catch` pour gérer les erreurs liées aux requêtes API et `response.ok` pour vérifier le statut des réponses HTTP.
 
-## Objectif pédagogique
+Des messages permettent d'informer l'utilisateur en cas de chargement, de réussite ou d'erreur.
 
-Ce projet a pour objectif de mettre en pratique les notions fondamentales de JavaScript, notamment la manipulation du DOM, les opérations asynchrones, les méthodes de tableaux, le stockage local et l'organisation du code avec les modules ES6.
+##  Réalisation
 
-Il permet également de comprendre le fonctionnement de l'Event Loop, des callbacks et de la propagation des événements.
+- **Développeur :** Abdelkarim Ghandour
+- **Projet :** CinéTrack V2
+- **Type :** Travail individuel
+- **Période :** 16/11/2026 – 20/11/2026
 
 ---
-
-**Projet :** CinéTrack
-**Technologies :** HTML5, Tailwind CSS, JavaScript ES6+ et MockAPI
-**Type :** Projet individuel
-**Date limite de soumission :** 13/11/2026
