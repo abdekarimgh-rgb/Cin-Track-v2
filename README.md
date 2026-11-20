@@ -71,7 +71,7 @@ Les opérations HTTP utilisées :
 
 Chaque utilisateur doit configurer son propre endpoint MockAPI dans le fichier `api.js`.
 
-## 🚀 Installation et lancement
+## Installation et lancement
 
 1. Cloner le dépôt :
 
