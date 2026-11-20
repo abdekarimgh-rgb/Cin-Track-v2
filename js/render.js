@@ -75,6 +75,7 @@ export function pagenation(datafilter, pageActuelle) {
             event.preventDefault()
             const page = parseInt(event.target.dataset.page)
             pagenation(datafilter, page)
+            modal(datafilter)
         })
     }
     renderNumberPage()
