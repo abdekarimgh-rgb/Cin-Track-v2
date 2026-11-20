@@ -48,7 +48,6 @@ function supprimerData(data) {
 
         const button = event.target.closest('.supprimerAdmin')
 
-
         if (!button) return;
 
         const id = button.dataset.number
@@ -65,6 +64,12 @@ function supprimerData(data) {
             console.log(data)
             affichageAdmin(data)
 
+            const dataLocal = JSON.parse(localStorage.getItem("favoris"))
+            const newDataLOcal = dataLocal.filter(element=>{
+                return element.id !== id
+            })
+            localStorage.setItem("favoris", JSON.stringify(newDataLOcal))
+
         } catch (e) {
             console.error("Erreur suppression :", e)
         }
@@ -72,7 +77,7 @@ function supprimerData(data) {
     })
 }
 
-
+//lapartie de modif et l'ajoute
 
 let idModif = null;
 function modification(data) {
@@ -166,6 +171,32 @@ function modification(data) {
 }
 modification(dataApi)
 
+
+function affichegeAvatarForm(){
+    const annee = document.getElementById("annee")
+    annee.max = new Date().getFullYear()
+
+    const URL = document.getElementById('URL')
+    URL.addEventListener("input", event=>{
+
+        const image = document.querySelector(".avatar-inp img") 
+        image.src = URL.value
+
+        const linkAvatar = document.querySelector("#link-inp")
+        linkAvatar.textContent = URL.value
+    })
+
+    const titre = document.getElementById('titre')
+    titre.addEventListener('input', event=>{
+
+        const titreAvatar = document.querySelector("#title-inp")
+        titreAvatar.textContent = titre.value
+    })
+        
+
+}
+
+
 function recuperationDesDonnes() {
     const titre = document.getElementById("titre").value
     const type = document.getElementById('type').value
@@ -219,7 +250,7 @@ function appliqueModification(data) {
 
         const nouveauObject = recuperationDesDonnes()
         
-        if(!nouveauObject.title || !nouveauObject.type || !nouveauObject.releaseYear || !nouveauObject.image || !nouveauObject.genres || !nouveauObject.directors || !nouveauObject.productionCountries || !description){
+        if(!nouveauObject.title || !nouveauObject.type || !nouveauObject.releaseYear || !nouveauObject.image || !nouveauObject.genres || !nouveauObject.directors || !nouveauObject.productionCountries || !nouveauObject.description){
         alert("les chemps doit tous remplir")
         return
     }
@@ -270,6 +301,7 @@ function ajouter() {
         }
     })
 
+    affichegeAvatarForm()
     const formAjo = document.getElementById("form-admin")
     formAjo.addEventListener("submit", async event => {
         event.preventDefault()
@@ -285,6 +317,9 @@ function ajouter() {
                 console.error("Error ajoute", error)
             }
         }
+        const updata = await getContents()
+        affichageAdmin(updata)
+        formAjo.reset()
     })
 
 }
