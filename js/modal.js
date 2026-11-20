@@ -101,6 +101,7 @@ export function modal(dataApi) {
                 divModal.remove()
             })
         })
+        
     })
 
 }
@@ -140,7 +141,7 @@ export function modal(dataApi) {
         document.getElementById("nomComment").value = ""
         document.getElementById("commentaire").value = ""
 
-
+        affichageComment(filme.id)
     })
 }
 
